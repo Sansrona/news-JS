@@ -1,21 +1,35 @@
+import { ArticlesData } from '../types/articles.types';
+import { Options, ErrorCodes } from '../types/custom.types';
+import { SourcesData } from '../types/sources.types';
+type Resp = {
+    endpoint: string;
+    options?: Options;
+};
+
+export type ArticleCallbackType = (data: ArticlesData) => void;
+export type SourceCallbackType = (data: SourcesData) => void;
+export type CallbackType = ArticleCallbackType | SourceCallbackType;
+
 class Loader {
-    constructor(baseLink, options) {
+    baseLink: string;
+    options: Options;
+    constructor(baseLink: string, options: Options) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
-        { endpoint, options = {} },
-        callback = () => {
+        { endpoint, options = {} }: Resp,
+        callback: CallbackType = () => {
             console.error('No callback for GET response');
         }
     ) {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res) {
+    errorHandler(res: Response) {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === ErrorCodes.Unauthorized || res.status === ErrorCodes.NotFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
@@ -23,7 +37,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options, endpoint) {
+    makeUrl(options: Options, endpoint: string) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -34,7 +48,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method, endpoint, callback, options = {}) {
+    load<T>(method: string, endpoint: string, callback: CallbackType, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

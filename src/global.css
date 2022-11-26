@@ -4,6 +4,7 @@ body {
     font-family: sans-serif;
 }
 
+
 header {
     padding: 10px 30px;
 }
@@ -15,21 +16,40 @@ header h1 {
 
 footer {
     height: 100px;
+}
+
+.footer__links {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    list-style-type: none;
+    padding-left: 0;
 }
-footer .copyright {
-    font-size: 14px;
-    color: #333;
-    text-align: center;
+
+@media (max-width: 1279px) {
+    body {
+        max-width: 1279px;
+    }
+    .main {
+        max-width: 1279px;
+    }
+    .header {
+        display: flex;
+        width: auto;
+        justify-content: center;
+    }
 }
-footer .copyright a {
-    color: #444;
-}
-footer .copyright a:hover {
-    color: #555;
-}
-footer .copyright:before {
-    content: '©';
+
+@media (max-width: 767px) {
+    body {
+        max-width: 767px;
+    }
+    .main {
+        max-width: 767px;
+    }
+    .header {
+        display: flex;
+        width: auto;
+        justify-content: center;
+    }
 }
