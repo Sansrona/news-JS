@@ -9,6 +9,7 @@
     font-family: Arial, sans-serif;
     border-radius: 5px;
     overflow: hidden;
+    transform: rotate(360deg);
 }
 
 .news__item:hover .news__meta-photo {

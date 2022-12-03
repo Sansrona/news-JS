@@ -1,7 +1,12 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 
-class App {
+interface AppProps {
+    controller: AppController;
+    view: AppView;
+}
+
+class App implements AppProps {
     controller: AppController;
     view: AppView;
     constructor() {

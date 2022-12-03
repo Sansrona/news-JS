@@ -11,8 +11,8 @@ export type SourceCallbackType = (data: SourcesData) => void;
 export type CallbackType = ArticleCallbackType | SourceCallbackType;
 
 class Loader {
-    baseLink: string;
-    options: Options;
+    private baseLink: string;
+    private options: Options;
     constructor(baseLink: string, options: Options) {
         this.baseLink = baseLink;
         this.options = options;
@@ -48,7 +48,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load<T>(method: string, endpoint: string, callback: CallbackType, options = {}) {
+    load(method: string, endpoint: string, callback: CallbackType, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
