@@ -1,12 +1,13 @@
 .sources {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     width: 100%;
-    height: 120px;
+    height: 320px;
     overflow: auto;
     align-items: center;
+    justify-content: center;
     font: 300 1em 'Fira Sans', sans-serif;
-}
+    }
 
 .source__item {
     background: none;
@@ -31,4 +32,32 @@
 .source__item-name {
     font-weight: 400;
     white-space: nowrap;
+}
+
+@media (max-width: 1279px) {
+    .buttons {
+        width: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sources {
+        width: auto;
+        height: fit-content;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .buttons {
+        width: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sources {
+        width: auto;
+        height: fit-content;
+        justify-content: center;
+    }
 }
